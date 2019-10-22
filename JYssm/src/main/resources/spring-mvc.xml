@@ -2,43 +2,34 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
     <!-- 通过context:component-scan元素扫描指定包下的控制器-->
-    <!--1) 扫描com.zking.zf及子子孙孙包下的控制器(扫描范围过大，耗时)-->
-    <!--<context:component-scan base-package="com.zking.ssm"/>-->
+    <!--1) 扫描及子子孙孙包下的控制器(扫描范围过大，耗时)-->
+    <context:component-scan base-package="com.zh.util"/>
 
     <!--1) use-dafault-filters="false"的情况下，根据表达式包含(include-filter)或排除(exclude-filter)指定包-->
-    <context:component-scan base-package="com.zking.ssm" use-default-filters="false">
-        <!-- include-filter：包含指定注解 -->
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <!--<context:include-filter type="regex" expression=".+\.controller\..*"/>-->
-        <!--<context:exclude-filter type="regex" expression=".+\.controller2\..*"/>-->
-    </context:component-scan>
+    <!--<context:component-scan base-package="com.javaxl.ssm" use-default-filters="false">-->
+    <!--<context:include-filter type="regex" expression=".+\.controller\..*"/>-->
+    <!--<context:exclude-filter type="regex" expression=".+\.controller2\..*"/>-->
+    <!--</context:component-scan>-->
 
     <!--2) 此标签默认注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter -->
-	<!--两个bean，这两个bean是spring MVC为@Controllers分发请求所必须的。并提供了数据绑定支持，-->
+    <!--两个bean，这两个bean是spring MVC为@Controllers分发请求所必须的。并提供了数据绑定支持，-->
     <!--@NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson）-->
     <mvc:annotation-driven></mvc:annotation-driven>
-
 
     <!--3) ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- viewClass需要在pom中引入两个包：standard.jar and jstl.jar -->
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView"></property>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--4) 单独处理图片、样式、js等资源 -->
-    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
-   <!-- <mvc:resources location="/css/" mapping="/css/**"/>
-    <mvc:resources location="/js/" mapping="/js/**"/>
-    <mvc:resources location="WEB-INF/images/" mapping="/images/**"/>-->
-
-    <!--5) 配置国际化资源文件 -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames">
             <list>
@@ -46,17 +37,11 @@
             </list>
         </property>
     </bean>
-
-    <!--6) 指定语言区域解析器，由它来确定使用哪个语言 -->
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-    </bean>
-
-    <!--7) 配置国际化操作拦截器-->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
     <mvc:interceptors>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
     </mvc:interceptors>
 
-    <!--配置文件上传解析器(CommonsMultipartResolver)-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 必须和用户JSP 的pageEncoding属性一致，以便正确解析表单的内容 -->
         <property name="defaultEncoding" value="UTF-8"></property>
@@ -66,28 +51,13 @@
         <property name="resolveLazily" value="true"/>
     </bean>
 
-    <!--配置jackson-->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="mappingJackson2HttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-    <bean id="mappingJackson2HttpMessageConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-        <!--处理中文乱码以及避免IE执行AJAX时，返回JSON出现下载文件-->
-        <property name="supportedMediaTypes">
-            <list>
-                <value>text/html;charset=UTF-8</value>
-                <value>text/json;charset=UTF-8</value>
-                <value>application/json;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
+    <!--4) 单独处理图片、样式、js等资源 -->
+    <!--<mvc:resources location="/css/" mapping="/css/**"/>-->
+    <!--<mvc:resources location="/images/" mapping="/images/**"/>-->
+    <!--<mvc:resources location="/js/" mapping="/js/**"/>-->
 
-    <!-- 开启Shiro注解 -->
-    <!-- 注解授权：AOP式方法级权限检查  -->
+
+    <!--开启shiro注解-->
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
           depends-on="lifecycleBeanPostProcessor">
         <property name="proxyTargetClass" value="true"></property>
@@ -104,5 +74,7 @@
                 </prop>
             </props>
         </property>
+        <property name="defaultErrorView" value="unauthorized"/>
     </bean>
+
 </beans>

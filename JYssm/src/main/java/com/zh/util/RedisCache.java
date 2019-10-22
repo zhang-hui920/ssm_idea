@@ -4,6 +4,7 @@ package com.zh.util;
 import org.apache.ibatis.cache.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -55,7 +56,7 @@ public class RedisCache implements Cache //实现类
         try{
             logger.info(">>>>>>>>>>>>>>>>>>>>>>>>putObject: key="+key+",value="+value);
             if(null!=value)
-                redisTemplate.opsForValue().set(key.toString(),value,2, TimeUnit.DAYS);
+                redisTemplate.opsForValue().set(key.toString(),value,20, TimeUnit.SECONDS);
         }catch (Exception e){
             e.printStackTrace();
             logger.error("redis保存数据异常！");
@@ -79,7 +80,7 @@ public class RedisCache implements Cache //实现类
     public Object removeObject(Object key) {
         try{
             if(null!=key)
-                return redisTemplate.expire(key.toString(),60,TimeUnit.SECONDS);//在缓存呆多久
+                return redisTemplate.expire(key.toString(),1,TimeUnit.DAYS);
         }catch (Exception e){
             e.printStackTrace();
             logger.error("redis获取数据异常！");

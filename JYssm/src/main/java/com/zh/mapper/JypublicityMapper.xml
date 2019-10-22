@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zh.mapper.JypublicityMapper" >
+  <resultMap id="BaseResultMap" type="com.zh.model.Jypublicity" >
+    <constructor >
+      <idArg column="cid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="writer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="body" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="date" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="elite" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pv" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cid, pid, writer, title, body, date, elite, pv
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_jy_publicity
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_jy_publicity
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zh.model.Jypublicity" >
+    insert into tb_jy_publicity (cid, pid, writer, 
+      title, body, date, 
+      elite, pv)
+    values (#{cid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{writer,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{body,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
+      #{elite,jdbcType=INTEGER}, #{pv,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zh.model.Jypublicity" >
+    insert into tb_jy_publicity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="writer != null" >
+        writer,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="elite != null" >
+        elite,
+      </if>
+      <if test="pv != null" >
+        pv,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="writer != null" >
+        #{writer,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="elite != null" >
+        #{elite,jdbcType=INTEGER},
+      </if>
+      <if test="pv != null" >
+        #{pv,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zh.model.Jypublicity" >
+    update tb_jy_publicity
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="writer != null" >
+        writer = #{writer,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="elite != null" >
+        elite = #{elite,jdbcType=INTEGER},
+      </if>
+      <if test="pv != null" >
+        pv = #{pv,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zh.model.Jypublicity" >
+    update tb_jy_publicity
+    set pid = #{pid,jdbcType=INTEGER},
+      writer = #{writer,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      body = #{body,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      elite = #{elite,jdbcType=INTEGER},
+      pv = #{pv,jdbcType=INTEGER}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>
