@@ -1,7 +1,9 @@
 package com.zh.mapper;
 
 import com.zh.model.Jyaffiche;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface JyafficheMapper {
     int deleteByPrimaryKey(Integer aid);
 

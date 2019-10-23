@@ -7,7 +7,7 @@
     <!--1. 注解式开发 -->
     <!-- 注解驱动 -->
     <context:annotation-config/>
-    <!-- 用注解方式注入bean，并指定查找范围：com.zh.ssm及子子孙孙包-->
+    <!-- 用注解方式注入bean，并指定查找范围：com.zh及子子孙孙包-->
     <context:component-scan base-package="com.zh"/>
     <!--注册数据库信息文件-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
@@ -40,7 +40,7 @@
         <!-- 自动扫描XxxMapping.xml文件，**任意路径 -->
         <property name="mapperLocations" value="classpath*:com/zh/**/mapper/*.xml"/>
         <!-- 指定别名 -->
-        <!--<property name="typeAliasesPackage" value="com/javaxl/ssm/**/model"/>-->
+        <!--<property name="typeAliasesPackage" value="com/zh/**/model"/>-->
         <!--配置pagehelper插件-->
         <property name="plugins">
             <array>
@@ -66,12 +66,12 @@
         </property>
     </bean>
 
-    <!--2) 自动扫描com/javaxl/oa/**/mapper下的所有XxxMapper接口(其实就是DAO接口)，并实现这些接口，-->
+    <!--2) 自动扫描com/zh/oa/**/mapper下的所有XxxMapper接口(其实就是DAO接口)，并实现这些接口，-->
     <!--   即可直接在程序中使用dao接口，不用再获取sqlsession对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--basePackage 属性是映射器接口文件的包路径。-->
         <!--你可以使用分号或逗号 作为分隔符设置多于一个的包路径-->
-        <property name="basePackage" value="com/javaxl/ssm/**/mapper"/>
+        <property name="basePackage" value="com/zh/**/mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <!--注解式事务配置-->
