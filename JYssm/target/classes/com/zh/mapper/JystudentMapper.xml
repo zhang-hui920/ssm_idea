@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zh.mapper.JystudentMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
+  <resultMap id="BaseResultMap" type="com.zh.model.Jystudent" >
+    <constructor >
+      <idArg column="sid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sage" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="school" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="profession" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="grade" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, cid, sname, sex, sage, school, profession, grade
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_jy_student
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_jy_student
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zh.model.Jystudent" >
+    insert into tb_jy_student (sid, cid, sname, 
+      sex, sage, school, 
+      profession, grade)
+    values (#{sid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{sage,jdbcType=INTEGER}, #{school,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zh.model.Jystudent" >
+    insert into tb_jy_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="sage != null" >
+        sage,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="sage != null" >
+        #{sage,jdbcType=INTEGER},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zh.model.Jystudent" >
+    update tb_jy_student
+    <set >
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="sage != null" >
+        sage = #{sage,jdbcType=INTEGER},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zh.model.Jystudent" >
+    update tb_jy_student
+    set cid = #{cid,jdbcType=INTEGER},
+      sname = #{sname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      sage = #{sage,jdbcType=INTEGER},
+      school = #{school,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

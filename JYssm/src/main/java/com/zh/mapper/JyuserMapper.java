@@ -1,7 +1,9 @@
 package com.zh.mapper;
 
 import com.zh.model.Jyuser;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface JyuserMapper {
     int deleteByPrimaryKey(String uid);
 

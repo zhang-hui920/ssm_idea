@@ -1,7 +1,9 @@
 package com.zh.mapper;
 
 import com.zh.model.Jymenu;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface JymenuMapper {
     int deleteByPrimaryKey(Integer mid);
 

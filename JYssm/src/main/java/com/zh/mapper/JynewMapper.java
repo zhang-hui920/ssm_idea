@@ -1,7 +1,9 @@
 package com.zh.mapper;
 
 import com.zh.model.Jynew;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface JynewMapper {
     int deleteByPrimaryKey(Integer nid);
 

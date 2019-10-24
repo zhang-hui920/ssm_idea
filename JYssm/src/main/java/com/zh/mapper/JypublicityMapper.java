@@ -1,7 +1,9 @@
 package com.zh.mapper;
 
 import com.zh.model.Jypublicity;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface JypublicityMapper {
     int deleteByPrimaryKey(Integer cid);
 

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zh.mapper.JyuserMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
+  <resultMap id="BaseResultMap" type="com.zh.model.Jyuser" >
+    <constructor >
+      <idArg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="upwd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="salt" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="utype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ustatus" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="birthday" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="question" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="profession" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="school" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="education" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="identity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="subject" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cintention" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, uname, upwd, salt, sex, utype, ustatus, email, birthday, question, profession, 
+    school, education, identity, subject, cintention, phone, address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_jy_user
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_jy_user
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zh.model.Jyuser" >
+    insert into tb_jy_user (uid, uname, upwd, 
+      salt, sex, utype, ustatus, 
+      email, birthday, question, 
+      profession, school, education, 
+      identity, subject, cintention, 
+      phone, address)
+    values (#{uid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{utype,jdbcType=INTEGER}, #{ustatus,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, #{cintention,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zh.model.Jyuser" >
+    insert into tb_jy_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="upwd != null" >
+        upwd,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="utype != null" >
+        utype,
+      </if>
+      <if test="ustatus != null" >
+        ustatus,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="question != null" >
+        question,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="identity != null" >
+        identity,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="cintention != null" >
+        cintention,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upwd != null" >
+        #{upwd,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="utype != null" >
+        #{utype,jdbcType=INTEGER},
+      </if>
+      <if test="ustatus != null" >
+        #{ustatus,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="cintention != null" >
+        #{cintention,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zh.model.Jyuser" >
+    update tb_jy_user
+    <set >
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upwd != null" >
+        upwd = #{upwd,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="utype != null" >
+        utype = #{utype,jdbcType=INTEGER},
+      </if>
+      <if test="ustatus != null" >
+        ustatus = #{ustatus,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="cintention != null" >
+        cintention = #{cintention,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zh.model.Jyuser" >
+    update tb_jy_user
+    set uname = #{uname,jdbcType=VARCHAR},
+      upwd = #{upwd,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      utype = #{utype,jdbcType=INTEGER},
+      ustatus = #{ustatus,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      question = #{question,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      cintention = #{cintention,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+</mapper>

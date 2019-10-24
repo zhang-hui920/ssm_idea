@@ -6,5 +6,7 @@ package com.zh;
  */
 
 public class test {
-
+    public static void main(String[] args) {
+        System.out.println("l力量力量力量");
+    }
 }
