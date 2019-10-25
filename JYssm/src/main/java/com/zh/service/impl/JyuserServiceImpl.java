@@ -45,4 +45,9 @@ public class JyuserServiceImpl implements JyuserService {
     public int updateByPrimaryKey(Jyuser record) {
         return jyuserMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public Jyuser login(String uid, String upwd) {
+        return jyuserMapper.login(uid,upwd);
+    }
 }

@@ -18,4 +18,6 @@ public interface JyuserService {
     int updateByPrimaryKeySelective(Jyuser record);
 
     int updateByPrimaryKey(Jyuser record);
+
+    Jyuser login(String uid, String upwd);
 }
